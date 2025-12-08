@@ -1,0 +1,12 @@
+name: mabenv
+channels:
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - matplotlib
+  - numpy
+  - open3d
+  - python=3.12.2
+  - tqdm
+  - trimesh
+prefix: /home/riella/anaconda3/envs/mabenv
