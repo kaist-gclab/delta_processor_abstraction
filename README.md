@@ -6,9 +6,9 @@ conda env create -f environment.yml
 conda activate mcnenv
 ```
 
-### Download Princeton Segmentation Benchmark Dataset for Model 📦️
-```
-```
+### Download Princeton Segmentation Benchmark Dataset for Model 📦️ <br />
+[Download Dataset] (https://drive.google.com/file/d/1T09piyXOaEpxwgwcyZRJIOnLx-NpZ8yr/view?usp=sharing) <br />
+이 repository의 가장 상위 폴더에 datasets가 위치하게 압축 해제 해두시면 됩니다.
 
 ### Test Mesh Segmentation Model using PSB 🧪
 ```
