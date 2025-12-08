@@ -3,7 +3,7 @@
 ### Set Environment 🚀
 ```
 conda env create -f environment.yml
-conda activate mcnenv
+conda activate mabenv
 ```
 
 ### Download Princeton Segmentation Benchmark Dataset for Model 📦️ <br />
