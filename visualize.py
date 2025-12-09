@@ -9,7 +9,7 @@ def vis_mult_seg(lst_points, lst_faces, lst_labels):
         cur_points = lst_points[i]
         cur_faces = lst_faces[i]
         cur_labels = lst_labels[i]
-        o3d_mesh = get_face_color_mesh(cur_labels, cur_points, cur_faces) # vert, face, color already included
+        o3d_mesh = get_face_color_abs(cur_labels, cur_points, cur_faces) # vert, face, color already included
         o3d_line = get_edge(cur_points, cur_faces)
         vis_lst.append(o3d_mesh)
         vis_lst.append(o3d_line)
@@ -254,3 +254,53 @@ def get_vert_color(labels, cmap='tab20'):
     colors = color_map(label_norm)[:, :3]
 
     return colors
+
+
+# ---------- only used in mesh_abs_visualize ----------
+def get_face_color_abs(labels, points, faces):
+    new_vert = points[faces].reshape(-1, 3) # (M*3, 3)
+    num_faces = faces.shape[0]
+    new_tri = np.arange(num_faces*3, dtype=np.int32).reshape(num_faces, 3)
+    fcolors = face_colors_for_abs(labels)
+    new_colors = np.repeat(fcolors, 3, axis=0)
+
+    out_mesh = o3d.geometry.TriangleMesh(
+        vertices=o3d.utility.Vector3dVector(new_vert),
+        triangles=o3d.utility.Vector3iVector(new_tri)
+    )
+    out_mesh.vertex_colors = o3d.utility.Vector3dVector(new_colors)
+    
+    return out_mesh
+
+
+def face_colors_for_abs(face_labels):
+    face_labels = np.asarray(face_labels)
+    classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
+    K = len(classes)
+    palette = np.array([
+        [183/255, 163/255,  227/255], # 0 -> light violet
+        [ 86/255, 180/255, 233/255],  # 1 -> sky blue   (#56B4E9)
+        [  0,   0, 1],  # 1 -> blue
+        [  0, 200/255,   0],  # 2 -> green
+        [1, 140/255,   0],  # 3 -> orange
+        [148/255,   0, 211/255],  # 4 -> purple
+        [  0, 200/255, 200/255],  # 5 -> cyan
+        [1, 215/255,   0],  # 6 -> yellow
+        [204/255, 121/255, 167/255],  # 7 -> magenta (Okabe–Ito #CC79A7)
+        [96/255, 78/255, 42/255], # 8 -> brown
+        [0, 158/225, 115/225], # 9 -> teal
+        [ 86/255, 180/255, 233/255],  # 10 -> sky blue   (#56B4E9)
+        [153/255, 153/255,  51/255],  # 11 -> olive      (#999933)
+        [136/255,  34/255,  85/255],  # 12 -> wine       (#882255)
+        [ 51/255,  34/255, 136/255],  # 13 -> dark blue  (#332288)
+        [127/255, 127/255, 127/255],  # 14 -> gray       (#7F7F7F)
+        [204/255, 102/255, 119/255],  # 15 -> rose       (#CC6677)
+        [ 88/255, 170/255, 108/255],  # 16 -> medium green (#58AA6C)
+        [255/255, 255/255, 255/255],  # 17 -> white      (#708090)
+        [184/255, 134/255,  11/255],  # 18 -> ochre (황토색) (#B8860B)
+        [245/255, 186/255,  187/255],  # 19 -> light pink (#F5BABB)
+        [183/255, 163/255,  227/255],  # 20 -> light violet (#B7A3E3)
+    ], dtype=np.float32)
+    # Table of K distinct RGB colors sampled from colormap
+    colors = palette[face_labels]
+    return colors.astype(np.float64)
