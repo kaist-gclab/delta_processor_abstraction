@@ -1,12 +1,13 @@
 name: mabenv
 channels:
-  - https://repo.anaconda.com/pkgs/main
-  - https://repo.anaconda.com/pkgs/r
+  - conda-forge
+  - defaults
 dependencies:
   - matplotlib
-  - numpy
   - open3d
-  - python=3.12.2
-  - tqdm
+  - numpy
   - trimesh
-prefix: /home/riella/anaconda3/envs/mabenv
+  - tqdm
+  - python=3.12.2
+  - networkx
+prefix: /opt/miniconda3/envs/mabenv
