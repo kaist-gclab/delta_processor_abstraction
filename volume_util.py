@@ -20,8 +20,24 @@ def split_by_face_label(mesh, labels):
 def fill_hole(part_mesh):
     repair.fill_holes(part_mesh)             # caps boundary loops
     repair.fix_normals(part_mesh)            # consistent orientation
-    part_mesh.remove_degenerate_faces()
-    part_mesh.remove_duplicate_faces()
+    if hasattr(part_mesh, "remove_degenerate_faces"):
+        part_mesh.remove_degenerate_faces()
+    else:
+        # older trimesh: use nondegenerate_faces mask/indices
+        if hasattr(part_mesh, "nondegenerate_faces"):
+            nd = part_mesh.nondegenerate_faces
+            # some versions make this a property, some a method
+            if callable(nd):
+                nd = nd()
+            # nd can be mask or indices; update_faces accepts both
+            part_mesh.update_faces(nd)
+            part_mesh.remove_unreferenced_vertices()
+            
+    if hasattr(part_mesh, "remove_duplicate_faces"):
+        part_mesh.remove_duplicate_faces()
+    else:
+        pass
+    
 
     # print(part_mesh.is_watertight)
     mesh_vol = abs(part_mesh.volume)
