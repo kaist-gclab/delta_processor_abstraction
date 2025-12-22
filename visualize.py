@@ -37,12 +37,23 @@ def vis_face_seg(points, faces, labels):
     o3d.visualization.draw_geometries([o3d_mesh, o3d_line])
 
 
-def get_face_color_mesh(labels, points, faces, cmap='tab20'):
-    color_map = plt.get_cmap(cmap) # clen, 3
+def get_face_color_mesh(labels, points, faces):
+    """_summary_: This get labels of FACE, points, face as input
+                    and returns colored mesh according to the label
+
+    Args:
+        labels (ndarray): labels (numf, 3)
+        points (ndarray): points (nump, 3)
+        faces (ndarray): faces (numf, 3)
+        X cmap (str, optional): Color map, removed now. Defaults to 'tab20'.
+
+    Returns:
+        out_mesh: Open3d mesh that contains points, faces, 
+    """
+    # color_map = plt.get_cmap(cmap) # clen, 3
     new_vert = points[faces].reshape(-1, 3) # (M*3, 3)
     num_faces = faces.shape[0]
     new_tri = np.arange(num_faces*3, dtype=np.int32).reshape(num_faces, 3)
-    # highlight = zero_out_except(labels, 0, off_value=1, remap_kept=True, start_at=2)
     # fcolors = face_colors_from_labels(labels, cmap)
     fcolors = face_colors_from_custom_labels(labels)
     new_colors = np.repeat(fcolors, 3, axis=0)
@@ -56,40 +67,7 @@ def get_face_color_mesh(labels, points, faces, cmap='tab20'):
     return out_mesh
 
 
-def zero_out_except(face_labels, keep, off_value=0, remap_kept=False, start_at=1):
-    """
-    face_labels: (F,) ints
-    keep: int or iterable of ints (labels to keep)
-    off_value: background value for all other labels (0 or -1 recommended)
-    remap_kept: if True, remap kept labels to [start_at .. start_at+K-1]
-    start_at: first id for remapped kept labels (default 1 so 0 can stay background)
-    """
-    labels = np.asarray(face_labels)
-    keep = np.atleast_1d(keep)
-
-    mask = np.isin(labels, keep)
-    out = np.full_like(labels, off_value)
-
-    if not remap_kept:
-        # keep original ids for kept labels
-        out[mask] = labels[mask]
-        return out
-
-    # remap only the kept labels to a compact range
-    kept_vals = np.unique(labels[mask])
-    # deterministic order
-    kept_vals.sort()
-    # build mapping: kept_val -> start_at + i
-    remap = {v: start_at + i for i, v in enumerate(kept_vals)}
-
-    # apply remap only on the kept positions
-    out_kept = np.empty(mask.sum(), dtype=out.dtype)
-    for i, v in enumerate(labels[mask]):
-        out_kept[i] = remap[v]
-    out[mask] = out_kept
-    return out
-
-
+# Not used
 def face_colors_from_labels(face_labels, cmap_name="tab20"):
     face_labels = np.asarray(face_labels)
     classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
@@ -104,37 +82,8 @@ def face_colors_from_labels(face_labels, cmap_name="tab20"):
 def face_colors_from_custom_labels(face_labels):
     face_labels = np.asarray(face_labels)
     classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
-    K = len(classes)
-    # palette = np.array([
-    #     [228,  26,  28],  # 0 -> red         (#E41A1C)
-    #     [ 55, 126, 184],  # 1 -> blue        (#377EB8)
-    #     [ 77, 175,  74],  # 2 -> green       (#4DAF4A)
-    #     [152,  78, 163],  # 3 -> purple      (#984EA3)
-    #     [230, 159,   0],  # 4 -> orange      (#E69F00, Okabe–Ito)
-    #     [  0, 158, 115],  # 5 -> teal (greenish blue)       (#009E73, Okabe–Ito)
-    #     [240, 228,  66],  # 6 -> yellow      (#F0E442, Okabe–Ito)
-    # ], dtype=np.uint8)
+    # K = len(classes)
     palette = np.array([
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
-        # [0,   0,   0],  # 0 -> red
         [1,   0,   0],  # 0 -> red
         [  0,   0, 1],  # 1 -> blue
         [  0, 200/255,   0],  # 2 -> green
@@ -156,54 +105,32 @@ def face_colors_from_custom_labels(face_labels):
         [184/255, 134/255,  11/255],  # 18 -> ochre (황토색) (#B8860B)
         [245/255, 186/255,  187/255],  # 19 -> light pink (#F5BABB)
         [183/255, 163/255,  227/255],  # 20 -> light violet (#B7A3E3)
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-        [0,   0,   0],  # 0 -> red
-
-        # [1,   0,   0],  # 0 -> red
-        # [  0,   0, 1],  # 1 -> blue
-        # [  0, 200/255,   0],  # 2 -> green
-        # [1, 140/255,   0],  # 3 -> orange
-        # [148/255,   0, 211/255],  # 4 -> purple
-        # [  0, 200/255, 200/255],  # 5 -> cyan
-        # [1, 215/255,   0],  # 6 -> yellow
-        # [204/255, 121/255, 167/255],  # 7 -> magenta (Okabe–Ito #CC79A7)
-        # [96/255, 78/255, 42/255], # 8 -> brown
-        # [0, 158/225, 115/225], # 9 -> teal
-        # [ 86/255, 180/255, 233/255],  # 10 -> sky blue   (#56B4E9)
-        # [153/255, 153/255,  51/255],  # 11 -> olive      (#999933)
-        # [136/255,  34/255,  85/255],  # 12 -> wine       (#882255)
-        # [ 51/255,  34/255, 136/255],  # 13 -> dark blue  (#332288)
-        # [127/255, 127/255, 127/255],  # 14 -> gray       (#7F7F7F)
+        [0,   0,   0],  # 21 -> black
+        [0,   0,   0],  # 22 -> black
+        [0,   0,   0],  # 23 -> black
+        [0,   0,   0],  # 24 -> black
+        [0,   0,   0],  # 25 -> black
+        [0,   0,   0],  # 26 -> black
+        [0,   0,   0],  # 27 -> black
+        [0,   0,   0],  # 28 -> black
+        [0,   0,   0],  # 29 -> black
+        [0,   0,   0],  # 30 -> black
+        [0,   0,   0],  # 31 -> black
+        [0,   0,   0],  # 32 -> black
+        [0,   0,   0],  # 33 -> black
+        [0,   0,   0],  # 34 -> black
+        [0,   0,   0],  # 35 -> black
+        [0,   0,   0],  # 36 -> black
+        [0,   0,   0],  # 37 -> black
+        [0,   0,   0],  # 38 -> black
+        [0,   0,   0],  # 39 -> black
+        [0,   0,   0],  # 40 -> black
+        [0,   0,   0],  # 41 -> black
+        [0,   0,   0],  # 42 -> black
+        [0,   0,   0],  # 43 -> black
+        [0,   0,   0],  # 44 -> black
+        [0,   0,   0],  # 45 -> black
+        [0,   0,   0],  # 46 -> black
     ], dtype=np.float32)
     # Table of K distinct RGB colors sampled from colormap
     colors = palette[face_labels]
