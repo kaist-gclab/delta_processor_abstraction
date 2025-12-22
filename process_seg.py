@@ -106,9 +106,6 @@ for i in range(360,380): # len(meshes)
         laabb_faces.append(aabb_faces)
         laabb_segs.append(aabb_seg)
 
-        # print("Part Area Difference: {:.3f}".format(obb_vol - part_vol))
-        # print("Obb Area: {:.3f}".format(obb_vol))
-
         tobb_vol += obb_vol
         tpart_vol += part_vol
 
@@ -117,7 +114,7 @@ for i in range(360,380): # len(meshes)
 
     ioo, iou = vt.mesh_iou_solid(mesh, obb_part_meshes)
     aioo, aiou = vt.mesh_iou_solid(mesh, aabb_part_meshes)
-    # iou, uiou = vt.mesh_iou_sampled(mesh, obb_part_meshes)
+    
     if iou > aiou:
         print("Intersection over Orig Obb {}: {:.3f}".format(i+1, ioo*100))
         visu.vis_mult_seg(lobb_points, lobb_faces, lobb_segs)
@@ -127,7 +124,7 @@ for i in range(360,380): # len(meshes)
 
     # print("Intersection over Union: {:.3f}".format(iou*100))
 
-    # save point label segmentation as extension .pseg
+    # save face label segmentation as extension .pseg
     pseg_fname = "{}.pseg".format(name.split(".")[0])
     ut.save_pseg(save_path, pseg_fname, seg)
 
