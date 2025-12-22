@@ -205,8 +205,8 @@ def face_colors_for_abs(face_labels):
         colors: color for all face labels
     """
     face_labels = np.asarray(face_labels)
-    classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
-    K = len(classes)
+    # classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
+    # K = len(classes)
     palette = np.array([
         [183/255, 163/255,  227/255], # 0 -> light violet
         [ 86/255, 180/255, 233/255],  # 1 -> sky blue   (#56B4E9)
