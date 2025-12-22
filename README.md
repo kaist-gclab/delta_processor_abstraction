@@ -46,4 +46,5 @@ simp_seg_label 파일에 txt파일로 각 클래스별 segmentation division이 
    - open3d_obb/aabb_to_trimesh_box: converts to trimesh bounding box mesh type to calculate inner cuboid
    - inner_obb_from_obb: convert ratio of axis/last axis
    - mesh_iou_solid: calculates ratio of cuboid volume over original mesh area
-4. visualize.py: mesh visualization 관련 함수들
+4. visualize.py: mesh visualization 관련 함수들<br />
+   - vis_mult_seg: visualize list of cuboids
