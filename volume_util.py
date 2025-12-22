@@ -236,6 +236,17 @@ def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
 
 
 def mesh_iou_solid(orig_mesh, obb_part_list, engine="blender"):
+    """_summary_
+
+    Args:
+        orig_mesh (trimesh): original mesh
+        obb_part_list (python list of cuboids): consists of trimesh box(cuboid) of abstraction
+        engine (str, optional): Engine to calculate volume. Defaults to "blender".
+
+    Returns:
+        inter/orig: mesh intersection between orig and cuboid parts / original mesh * 100 (%)
+        inter/union: mesh intersection between orig and cuboid parts / union * 100 (%)
+    """
     obb_mesh = trimesh.boolean.union(obb_part_list, engine=engine) # gathered box meshes
 
 
