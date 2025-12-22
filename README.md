@@ -51,4 +51,4 @@ simp_seg_label 파일에 txt파일로 각 클래스별 segmentation division이 
    - vis_face_seg: visualize original face segmentation
       - get_face_color_mesh: helper function of vis_face_seg
          - face_colors_from_custom_labels: return color for labels
-   -
+   - get_edge: calculate edge segment from points and faces
