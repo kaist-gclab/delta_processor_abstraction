@@ -82,8 +82,6 @@ for i in range(360,380): # len(meshes)
     aabb_part_meshes = []
     for pkey in part_meshes.keys():
         part_mesh, part_vol = vt.fill_hole(part_meshes[pkey]) # convert into watertight mesh
-        # bobb_mesh, bobb_vol = vt.calculate_obb(part_meshes[pkey])
-        # obb_mesh, obb_vol = vt.inner_obb_from_obb(bobb_mesh, 0.95, 0.8)
 
         part_points = ut.get_vertex(part_mesh)
         part_faces = ut.get_face(part_mesh)
