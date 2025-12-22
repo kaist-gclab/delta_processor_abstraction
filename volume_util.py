@@ -148,42 +148,7 @@ def aabb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
 #----------remove outlier and calculate bounding box(o3d)----------
 
 
-# calculate bounding box and change size by ratio
-def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
-    """_summary_
-
-    Args:
-        obb (trimesh.primitives.Box): raw bounding box
-        ratioh (float, optional): it is not necessary z-axis, but it is last axis on data. Defaults to 1.0.
-        ratio (float, optional): other two axis. Defaults to 0.8.
-
-    Returns:
-        inner_obb: re-calculated inner obb using two ratios
-        inner_vol: volume (float)
-    """
-    # 1) get oriented side lengths (in box local frame)
-    ext = obb.primitive.extents  # (3,) float
-
-    scale = np.ones(3)
-    scale[0] *= ratio
-    scale[1] *= ratio
-    scale[2] *= ratioh
-
-    # 2) shrink them
-    inner_extents = scale * ext
-
-    # 3) use the same transform (same center + orientation)
-    T = obb.primitive.transform
-
-    # 4) create a new Box primitive
-    inner_obb = trimesh.primitives.Box(extents=inner_extents, transform=T)
-
-    inner_vol = float(np.prod(inner_extents))
-
-    return inner_obb, inner_vol
-
-
-
+#----------convert to bounding box(trimesh)----------
 def open3d_obb_to_trimesh_box(obb) -> trimesh.primitives.Box:
     """_summary_: Convert an Open3D OrientedBoundingBox to a trimesh Box mesh.
 
@@ -232,6 +197,42 @@ def open3d_aabb_to_trimesh_box(aabb) -> trimesh.primitives.Box:
     # Trimesh primitive box at that pose
     box = trimesh.primitives.Box(extents=extents, transform=T)
     return box
+#----------convert to bounding box(trimesh)----------
+
+
+#----------calculate bounding box and change size by ratio----------
+def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
+    """_summary_
+
+    Args:
+        obb (trimesh.primitives.Box): raw bounding box
+        ratioh (float, optional): it is not necessary z-axis, but it is last axis on data. Defaults to 1.0.
+        ratio (float, optional): other two axis. Defaults to 0.8.
+
+    Returns:
+        inner_obb: re-calculated inner obb using two ratios
+        inner_vol: volume (float)
+    """
+    # 1) get oriented side lengths (in box local frame)
+    ext = obb.primitive.extents  # (3,) float
+
+    scale = np.ones(3)
+    scale[0] *= ratio
+    scale[1] *= ratio
+    scale[2] *= ratioh
+
+    # 2) shrink them
+    inner_extents = scale * ext
+
+    # 3) use the same transform (same center + orientation)
+    T = obb.primitive.transform
+
+    # 4) create a new Box primitive
+    inner_obb = trimesh.primitives.Box(extents=inner_extents, transform=T)
+
+    inner_vol = float(np.prod(inner_extents))
+
+    return inner_obb, inner_vol
 
 
 def mesh_iou_solid(orig_mesh, obb_part_list, engine="blender"):
