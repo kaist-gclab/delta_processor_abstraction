@@ -44,5 +44,6 @@ simp_seg_label 파일에 txt파일로 각 클래스별 segmentation division이 
    - fill_hole: fills hole for part mesh
    - obb/aabb without outliers: calculates cuboid for part mesh without outlier points
    - open3d_obb/aabb_to_trimesh_box: converts to trimesh bounding box mesh type to calculate inner cuboid
+   - inner_obb_from_obb: convert ratio of axis/last axis
    - 
 4. visualize.py: mesh visualization 관련 함수들
