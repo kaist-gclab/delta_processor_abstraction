@@ -96,13 +96,6 @@ def get_face(mesh, library="trimesh"):
         return mesh.faces
     elif library == "o3d":
         return np.asarray(mesh.triangles)
-    
-
-def read_seseg(dirpath, fname):
-    fpath = os.path.join(dirpath, fname)
-    seseg = np.loadtxt(fpath, dtype=np.float32)
-
-    return seseg
 
 
 def save_seseg(dirpath, fname, labels):
