@@ -13,6 +13,10 @@ conda activate mabenv
 ```
 bash ./run_test3.sh
 ```
+If you want to save log<br />
+```
+bash ./run_test3.sh | tee -a "test3.log"
+```
 
 ### Explanation of Direct Functions 💡
 
