@@ -98,13 +98,6 @@ def get_face(mesh, library="trimesh"):
         return np.asarray(mesh.triangles)
 
 
-def save_seseg(dirpath, fname, labels):
-    fpath = os.path.join(dirpath, fname)
-    num_classes = labels.shape[1]
-    _format = " ".join(["%.6f"] * num_classes)
-    np.savetxt(fpath, labels, fmt=_format, newline="\n")
-
-
 def get_fnames(dir_path):
     filenames = [d for d in os.listdir(dir_path)]
     sfilenames = sorted(filenames, key=lambda d: int(d.split(".")[0].split("_")[0]))
