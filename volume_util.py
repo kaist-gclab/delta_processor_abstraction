@@ -68,7 +68,7 @@ def obb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
         points: (N, 3) numpy array
         outlier_ratio: fraction of farthest points to drop (e.g. 0.05 for 5%)
     Returns:
-        obb (open3d):
+        obb (open3d): oriented bounding box
         obb_vol (float): bounding box volume
     """
     pts = np.asarray(points)
@@ -147,29 +147,6 @@ def aabb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
     return aabb, aabb_vol
 
 
-# convert o3d Box into o3d mesh
-# def obb_to_box_mesh(obb: o3d.geometry.OrientedBoundingBox) -> o3d.geometry.TriangleMesh:
-#     extent = np.asarray(obb.extent)   # (dx, dy, dz)
-#     center = np.asarray(obb.center)
-#     R = np.asarray(obb.R)
-
-#     # 1) Create axis-aligned box with same side lengths
-#     box = o3d.geometry.TriangleMesh.create_box(
-#         width=extent[0],
-#         height=extent[1],
-#         depth=extent[2],
-#     )
-
-#     # 2) Move its center to origin
-#     box.translate(-box.get_center())
-
-#     # 3) Rotate and translate to match the OBB pose
-#     box.rotate(R, center=(0, 0, 0))
-#     box.translate(center)
-
-#     return box
-
-
 # calculate bounding box and change size by ratio
 def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
     # 1) get oriented side lengths (in box local frame)
@@ -194,29 +171,16 @@ def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
     return inner_obb, inner_vol
 
 
-# Helper function to convert o3d box -> trimesh.primitives.Box
-def open3d_obb_to_trimesh(obb) -> trimesh.Trimesh:
-    """
-    Convert an Open3D OrientedBoundingBox to a trimesh Box mesh.
-    """
-    center = np.asarray(obb.center)       # (3,)
-    # center = np.asarray(obb.get_center())
-    extents = np.asarray(obb.extent)      # full lengths along each axis (dx, dy, dz)
-    R = np.asarray(obb.R)                 # 3x3 rotation matrix
-
-    # Axis-aligned box centered at origin
-    box = trimesh.creation.box(extents=extents)
-
-    # Apply pose (R, center)
-    T = np.eye(4)
-    T[:3, :3] = R
-    T[:3, 3] = center
-    box.apply_transform(T)
-
-    return box
-
 
 def open3d_obb_to_trimesh_box(obb) -> trimesh.primitives.Box:
+    """_summary_: Convert an Open3D OrientedBoundingBox to a trimesh Box mesh.
+
+    Args:
+        obb (open3d.geometry.Geometry): o3d box mesh
+
+    Returns:
+        box( trimesh.primitives.Box): trimesh box mesh
+    """
     center = np.asarray(obb.center)   # or np.asarray(obb.get_center())
     extents = np.asarray(obb.extent)  # (dx, dy, dz)
     R = np.asarray(obb.R)             # 3x3 rotation
@@ -233,6 +197,14 @@ def open3d_obb_to_trimesh_box(obb) -> trimesh.primitives.Box:
 
 
 def open3d_aabb_to_trimesh_box(aabb) -> trimesh.primitives.Box:
+    """_summary_
+
+    Args:
+        aabb (_type_): _description_
+
+    Returns:
+        trimesh.primitives.Box: _description_
+    """
     # Open3D AABB API
     center  = np.asarray(aabb.get_center())   # (3,)
     extents = np.asarray(aabb.get_extent())   # (dx, dy, dz)

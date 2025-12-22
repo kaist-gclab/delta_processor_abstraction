@@ -95,8 +95,6 @@ for i in range(360,380): # len(meshes)
 
         obb_box, obb_vol = vt.obb_without_outliers(part_points, 0.03) # 0.03
         aabb_box, aabb_vol = vt.aabb_without_outliers(part_points, 0.03)
-        # obb_mesh_o3d = vt.obb_to_box_mesh(obb_box)
-        # tri_mesh_out = vt.open3d_obb_to_trimesh(obb_box)
         obb_mesh_box = vt.open3d_obb_to_trimesh_box(obb_box)
         aabb_mesh_box = vt.open3d_aabb_to_trimesh_box(aabb_box)
         obb_mesh, obb_vol = vt.inner_obb_from_obb(obb_mesh_box, 1.0, 0.9) # 0.8
