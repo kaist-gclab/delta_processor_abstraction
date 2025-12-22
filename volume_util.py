@@ -30,10 +30,11 @@ def fill_hole(part_mesh):
     """_summary_: fills hole for part mesh
 
     Args:
-        part_mesh (_type_): _description_
+        part_mesh (submesh): submesh that contains points, faces, ...
 
     Returns:
-        _type_: _description_
+        part_mesh (submesh): with hole filled
+        mesh_vol: volume of original part_mesh
     """
     repair.fill_holes(part_mesh)             # caps boundary loops
     repair.fix_normals(part_mesh)            # consistent orientation
@@ -65,6 +66,7 @@ def calculate_obb(part_mesh):
 
     Args:
         part_mesh (trimesh object): part of the mesh
+        
     Returns:
         obb (trimesh Box object): 
         obb_vol (float): bounding box volume
