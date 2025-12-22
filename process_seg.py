@@ -57,14 +57,6 @@ for i in range(360,380): # len(meshes)
     elem = num_lst[i%20] # elem = idx of cur_seg
     seg = cur_seg[elem] # face segmentation
     assert faces.shape[0] == cur_seg[elem].shape[0], "len vertices and len labels not same"
-    # cur_dict = lst_dict[i%20]
-    # new_seg = ut.create_new_label(seg, cur_dict) # convert seg using dictionary
-    # if i == 377:
-    #     seg2 = cur_seg[3]
-    #     cur_dict2 = {7:2, 6:2, 10:100, 9:100, 8:100, 0:100, 3:100, 1:100, 14:100, 2:100, 4:100, 13:100, 12:100, 11:100, 5:100}
-    #     new_seg2 = ut.create_new_label(seg2, cur_dict2)
-    #     new_seg = np.minimum(new_seg, new_seg2)
-    # part_meshes = vt.split_by_face_label(mesh, new_seg)
     part_meshes = vt.split_by_face_label(mesh, seg)
 
     tobb_vol = 0
