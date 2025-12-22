@@ -35,6 +35,8 @@ for i in range(0, 20): # please process 20 meshes at one run
     points = ut.get_vertex(mesh)
     faces = ut.get_face(mesh)
     cur_seg = point_seg[i] # get related face segmentation
+    # Get num_lst from simp_pseg_label
+    # e.g. first num_lst is for class 1
     num_lst = [1,2,1,0,4, 7,0,4,9,5, 8,6,0,8,1, 1,7,3,3,3] # human
     # num_lst = [2,0,0,11,7, 2,6,12,6,10, 6,6,3,3,8, 4,0,11,7,1] # cup
     # num_lst = [2,0,0,7,3, 1,7,0,5,2, 1,5,0,1,0, 1,2,4,1,0] # glasses
