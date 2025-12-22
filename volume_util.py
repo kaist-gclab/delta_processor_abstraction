@@ -236,29 +236,19 @@ def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
 
 
 def mesh_iou_solid(orig_mesh, obb_part_list, engine="blender"):
-    # boxes = [open3d_obb_to_trimesh_box(obb) for obb in obb_part_list] # open3d box meshes
-    # obb_mesh = trimesh.boolean.union(boxes, engine=engine) # gathered box meshes
     obb_mesh = trimesh.boolean.union(obb_part_list, engine=engine) # gathered box meshes
-    # print(orig_mesh.is_watertight)
-    # print(obb_mesh.is_watertight)
+
 
     mesh_union = trimesh.boolean.union([orig_mesh, obb_mesh], engine=engine)
     mesh_inter = trimesh.boolean.intersection([orig_mesh, obb_mesh], engine=engine, check_volume=True)
-    # print(mesh_union.is_watertight)
-    # print(mesh_inter.is_watertight)
+
     
     if mesh_inter is None:
         return 0.0
-    # elif isinstance(mesh_inter, trimesh.Trimesh):
-    #     mesh_inter = [mesh_inter]
-    # else:
-    #     mesh_inter = mesh_inter
-    
+
     v_orig = orig_mesh.volume
     v_union = mesh_union.volume
     v_inter = mesh_inter.volume
-    # v_inter = sum(m.volume for m in mesh_inter)
-
 
     if v_orig <= 0:
         return 0.0
