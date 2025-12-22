@@ -37,15 +37,6 @@ for i in tqdm(range(0,380)): # len(meshes)
     cnt += 1
     part_meshes = vt.split_by_face_label(mesh, seg)
 
-    # lst_points = []
-    # lst_faces = []
-    # lst_segs = []
-    # lobb_points = []
-    # lobb_faces = []
-    # lobb_segs = []
-    # laabb_points = []
-    # laabb_faces = []
-    # laabb_segs = []
     obb_part_meshes = []
     aabb_part_meshes = []
     
@@ -55,10 +46,6 @@ for i in tqdm(range(0,380)): # len(meshes)
         part_points = ut.get_vertex(part_mesh)
         part_faces = ut.get_face(part_mesh)
         part_seg = np.zeros((part_faces.shape[0],), dtype=np.int64)
-        
-        # lst_points.append(part_points)
-        # lst_faces.append(part_faces)
-        # lst_segs.append(part_seg)
 
         obb_box, obb_vol = vt.obb_without_outliers(part_points, 0.03) # 0.03
         aabb_box, aabb_vol = vt.aabb_without_outliers(part_points, 0.03)
@@ -75,14 +62,6 @@ for i in tqdm(range(0,380)): # len(meshes)
         aabb_points = ut.get_vertex(aabb_mesh).copy()
         aabb_faces = ut.get_face(aabb_mesh).copy()
         aabb_seg = np.ones((aabb_faces.shape[0],), dtype=np.int64)
-        
-        # lobb_points.append(obb_points)
-        # lobb_faces.append(obb_faces)
-        # lobb_segs.append(obb_seg)
-
-        # laabb_points.append(aabb_points)
-        # laabb_faces.append(aabb_faces)
-        # laabb_segs.append(aabb_seg)
 
         obb_part_meshes.append(obb_mesh)
         aabb_part_meshes.append(aabb_mesh)
