@@ -5,6 +5,15 @@ from trimesh import repair
 
 
 def split_by_face_label(mesh, labels):
+    """_summary_
+
+    Args:
+        mesh (trimesh): contains points, faces, vertex, normal ...
+        labels (ndarray): label for mesh faces
+
+    Returns:
+        parts: dictionary of submesh (parts)
+    """
     parts = {}
     for clabel in np.unique(labels):
         clabel = int(clabel)
@@ -18,6 +27,14 @@ def split_by_face_label(mesh, labels):
 
 
 def fill_hole(part_mesh):
+    """_summary_: fills hole for part mesh
+
+    Args:
+        part_mesh (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     repair.fill_holes(part_mesh)             # caps boundary loops
     repair.fix_normals(part_mesh)            # consistent orientation
     if hasattr(part_mesh, "remove_degenerate_faces"):
@@ -37,9 +54,7 @@ def fill_hole(part_mesh):
         part_mesh.remove_duplicate_faces()
     else:
         pass
-    
 
-    # print(part_mesh.is_watertight)
     mesh_vol = abs(part_mesh.volume)
 
     return part_mesh, mesh_vol
