@@ -183,14 +183,6 @@ def vis_init_patch(points, faces, labels):
     o3d.visualization.draw_geometries([o3d_mesh, o3d_line])
 
 
-def get_mesh(points, faces):
-    o3d_mesh = o3d.geometry.TriangleMesh()
-    o3d_mesh.vertices = o3d.utility.Vector3dVector(points)
-    o3d_mesh.triangles = o3d.utility.Vector3iVector(faces)
-
-    return o3d_mesh
-
-
 # ---------- only used in mesh_abs_visualize ----------
 def get_face_color_abs(labels, points, faces):
     """_summary_: This get labels of FACE, points, face of one cuboid
