@@ -252,7 +252,6 @@ def mesh_iou_solid(orig_mesh, obb_part_list, engine="blender"):
 
     mesh_union = trimesh.boolean.union([orig_mesh, obb_mesh], engine=engine)
     mesh_inter = trimesh.boolean.intersection([orig_mesh, obb_mesh], engine=engine, check_volume=True)
-
     
     if mesh_inter is None:
         return 0.0
