@@ -191,14 +191,6 @@ def get_mesh(points, faces):
     return o3d_mesh
 
 
-def get_vert_color(labels, cmap='tab20'):
-    label_norm = labels.astype(float) / max(labels.max(), 1)
-    color_map = plt.get_cmap(cmap)
-    colors = color_map(label_norm)[:, :3]
-
-    return colors
-
-
 # ---------- only used in mesh_abs_visualize ----------
 def get_face_color_abs(labels, points, faces):
     """_summary_: This get labels of FACE, points, face of one cuboid
