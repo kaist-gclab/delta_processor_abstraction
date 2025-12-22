@@ -40,29 +40,36 @@ for i in tqdm(visualize_idx): # len(meshes) range(23,380)
     cnt += 1
     part_meshes = vt.split_by_face_label(mesh, seg)
 
+    # part mesh
     lst_points = []
     lst_faces = []
     lst_segs = []
+    # obb cuboid mesh
     lobb_points = []
     lobb_faces = []
     lobb_segs = []
+    # aabb cuboid mesh
     laabb_points = []
     laabb_faces = []
     laabb_segs = []
+    # generated o3d mesh from visualize
     obb_part_meshes = []
     aabb_part_meshes = []
     
     for pkey in part_meshes.keys():
         part_mesh, part_vol = vt.fill_hole(part_meshes[pkey]) # convert into watertight mesh
 
+        # using part key, get related point, face, seg for mesh
         part_points = ut.get_vertex(part_mesh)
         part_faces = ut.get_face(part_mesh)
         part_seg = np.zeros((part_faces.shape[0],), dtype=np.int64)
         
+        # add part mesh
         lst_points.append(part_points)
         lst_faces.append(part_faces)
         lst_segs.append(part_seg)
 
+        # calculate volume
         obb_box, obb_vol = vt.obb_without_outliers(part_points, 0.03) # 0.03
         aabb_box, aabb_vol = vt.aabb_without_outliers(part_points, 0.03)
 
