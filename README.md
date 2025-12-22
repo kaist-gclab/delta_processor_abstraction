@@ -39,5 +39,6 @@ simp_seg_label 파일에 txt파일로 각 클래스별 segmentation division이 
 
 ### Explanation of Indirect Functions ✨
 1. util.py: 파일 불러오기 및 저장 관련 함수들
-2. volume_util.py: part mesh, obb, aabb 계산 및 abstraction area 계산해주는 함수들
-3. visualize.py: mesh visualization 관련 함수들
+2. volume_util.py: part mesh, obb, aabb 계산 및 abstraction area 계산해주는 함수들<br />
+   - split_by_face_label: creates part mesh dictionary
+4. visualize.py: mesh visualization 관련 함수들
