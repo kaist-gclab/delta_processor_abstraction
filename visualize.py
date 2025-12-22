@@ -54,7 +54,6 @@ def get_face_color_mesh(labels, points, faces):
     new_vert = points[faces].reshape(-1, 3) # (M*3, 3)
     num_faces = faces.shape[0]
     new_tri = np.arange(num_faces*3, dtype=np.int32).reshape(num_faces, 3)
-    # fcolors = face_colors_from_labels(labels, cmap)
     fcolors = face_colors_from_custom_labels(labels)
     new_colors = np.repeat(fcolors, 3, axis=0)
 
@@ -67,22 +66,8 @@ def get_face_color_mesh(labels, points, faces):
     return out_mesh
 
 
-# Not used
-def face_colors_from_labels(face_labels, cmap_name="tab20"):
-    face_labels = np.asarray(face_labels)
-    classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
-    K = len(classes)
-
-    color_map = plt.get_cmap(cmap_name)
-    # Table of K distinct RGB colors sampled from colormap
-    table = color_map(np.linspace(0, 1, max(K, 1)))[:, :3]  # drop alpha
-    return table[inv].astype(np.float64)
-
-
 def face_colors_from_custom_labels(face_labels):
     face_labels = np.asarray(face_labels)
-    # classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
-    # K = len(classes)
     palette = np.array([
         [1,   0,   0],  # 0 -> red
         [  0,   0, 1],  # 1 -> blue
@@ -205,8 +190,6 @@ def face_colors_for_abs(face_labels):
         colors: color for all face labels
     """
     face_labels = np.asarray(face_labels)
-    # classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
-    # K = len(classes)
     palette = np.array([
         [183/255, 163/255,  227/255], # 0 -> light violet
         [ 86/255, 180/255, 233/255],  # 1 -> sky blue   (#56B4E9)
