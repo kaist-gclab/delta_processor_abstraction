@@ -61,7 +61,7 @@ def fill_hole(part_mesh):
     return part_mesh, mesh_vol
 
 
-# Outlier은 제거하고 bounding box를 계산
+#----------remove outlier and calculate bounding box(o3d)----------
 def obb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
     """
     Args:
@@ -145,10 +145,22 @@ def aabb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
     aabb_vol = float(np.prod(extents))
 
     return aabb, aabb_vol
+#----------remove outlier and calculate bounding box(o3d)----------
 
 
 # calculate bounding box and change size by ratio
 def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
+    """_summary_
+
+    Args:
+        obb (trimesh.primitives.Box): raw bounding box
+        ratioh (float, optional): it is not necessary z-axis, but it is last axis on data. Defaults to 1.0.
+        ratio (float, optional): other two axis. Defaults to 0.8.
+
+    Returns:
+        inner_obb: re-calculated inner obb using two ratios
+        inner_vol: volume (float)
+    """
     # 1) get oriented side lengths (in box local frame)
     ext = obb.primitive.extents  # (3,) float
 
