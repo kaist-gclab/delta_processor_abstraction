@@ -104,16 +104,6 @@ def get_fnames(dir_path):
 
     return sfilenames
 
-def create_new_label(cur_label, map_dict):
-    len_label = cur_label.shape[0] # get shape
-    new_label = np.empty(len_label, dtype=np.int64)
-    # get mask
-    for _k in map_dict.keys():
-        mask = (cur_label == _k)
-        new_label[mask] = map_dict[_k]
-
-    return new_label
-
 
 def read_pseg(dirpath, fname):
     fpath = os.path.join(dirpath, fname)
