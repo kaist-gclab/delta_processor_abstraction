@@ -28,7 +28,7 @@ os.makedirs(save_path, exist_ok=True)
 meshes, names = ut.read_mesh(gt_path) # read all meshes / sorted
 point_seg, _, _ = ut.read_seg_res(seg_res_path)
 
-for i in range(379,380): # len(meshes)
+for i in range(0, 20): # len(meshes)
     mesh = meshes[i]
     name = names[i]
     points = ut.get_vertex(mesh)

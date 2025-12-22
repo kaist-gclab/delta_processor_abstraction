@@ -25,7 +25,7 @@ def vis_mult_seg(lst_points, lst_faces, lst_labels):
 
 
 def vis_face_seg(points, faces, labels):
-    """_summary_
+    """_summary_: visualize segmentation
 
     Args:
         points (ndarray): points (nump, 3)
