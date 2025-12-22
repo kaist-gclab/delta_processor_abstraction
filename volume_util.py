@@ -61,23 +61,6 @@ def fill_hole(part_mesh):
     return part_mesh, mesh_vol
 
 
-def calculate_obb(part_mesh):
-    """_summary_
-
-    Args:
-        part_mesh (trimesh object): part of the mesh
-        
-    Returns:
-        obb (trimesh Box object): 
-        obb_vol (float): bounding box volume
-    """
-    obb = part_mesh.bounding_box_oriented # trimesh.primitives.Box
-    obb_extents = obb.extents # length of side (3,)
-    obb_vol = obb_extents.prod()
-
-    return obb, obb_vol
-
-
 # Outlier은 제거하고 bounding box를 계산
 def obb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
     """
