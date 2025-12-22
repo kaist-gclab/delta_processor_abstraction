@@ -49,7 +49,7 @@ simp_seg_label 파일에 txt파일로 각 클래스별 segmentation division이 
 4. visualize.py: mesh visualization 관련 함수들<br />
    - vis_mult_seg: visualize list of cuboids
       - get_face_color_abs: helper function to color individual cuboid
-         - 
+         - get_face_color_abs: return color for cuboid labels
    - vis_face_seg: visualize original face segmentation
       - get_face_color_mesh: helper function of vis_face_seg
          - face_colors_from_custom_labels: return color for labels
