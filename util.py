@@ -105,11 +105,11 @@ def get_fnames(dir_path):
     return sfilenames
 
 
-def read_pseg(dirpath, fname):
-    fpath = os.path.join(dirpath, fname)
-    pseg = np.loadtxt(fpath, dtype=np.float32)
+# def read_pseg(dirpath, fname):
+#     fpath = os.path.join(dirpath, fname)
+#     pseg = np.loadtxt(fpath, dtype=np.float32)
 
-    return pseg
+#     return pseg
 
 
 def save_pseg(dirpath, fname, labels):
