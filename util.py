@@ -154,9 +154,11 @@ def save_pseg(dirpath, fname, labels):
 
 
 def read_pseg_res(dir_path):
-    """Read segmentation result and seg(eseg)/sseg(seseg) file names
+    """_summary_: Read segmentation result and seg(eseg)/sseg(seseg) file names
+
     Args:
         dir_path (python path): path where ground truth segmentation is saved
+        
     Returns:
         psegs (python list): loaded point segmentation in python list.
     """

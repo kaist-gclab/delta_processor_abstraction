@@ -126,8 +126,10 @@ for i in range(360,380): # len(meshes)
         visu.vis_mult_seg(laabb_points, laabb_faces, laabb_segs)
 
     # print("Intersection over Union: {:.3f}".format(iou*100))
-    # save point segmentation as extension .pseg
+
+    # save point label segmentation as extension .pseg
     pseg_fname = "{}.pseg".format(name.split(".")[0])
     ut.save_pseg(save_path, pseg_fname, seg)
+
     # visu.vis_mult_seg(lst_points, lst_faces, lst_segs)
     
