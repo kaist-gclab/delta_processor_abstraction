@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 
 
 def vis_mult_seg(lst_points, lst_faces, lst_labels):
+    """_summary_: visualize multiple cuboids
+
+    Args:
+        lst_points (python list of ndarray): (ncub, 8)
+        lst_faces (python list of ndarray): (ncub, 6)
+        lst_labels (python list of ndarray): (ncub, 6)
+    """
     vis_lst = []
     for i in range(len(lst_points)):
         cur_points = lst_points[i]
