@@ -48,3 +48,5 @@ simp_seg_label 파일에 txt파일로 각 클래스별 segmentation division이 
    - mesh_iou_solid: calculates ratio of cuboid volume over original mesh area
 4. visualize.py: mesh visualization 관련 함수들<br />
    - vis_mult_seg: visualize list of cuboids
+   - vis_face_seg: visualize original face segmentation
+   - 
