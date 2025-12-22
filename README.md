@@ -13,7 +13,7 @@ conda activate mabenv
 ```
 bash ./run_test3.sh
 ```
-If you want to save log<br />
+만일 로그를 저장하고 싶다면
 ```
 bash ./run_test3.sh | tee -a "test3.log"
 ```
