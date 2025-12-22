@@ -98,13 +98,6 @@ def get_face(mesh, library="trimesh"):
         return np.asarray(mesh.triangles)
     
 
-def read_eseg(dirpath, fname):
-    fpath = os.path.join(dirpath, fname)
-    eseg = np.loadtxt(fpath, dtype=np.int64)
-
-    return eseg
-    
-
 def read_seseg(dirpath, fname):
     fpath = os.path.join(dirpath, fname)
     seseg = np.loadtxt(fpath, dtype=np.float32)
