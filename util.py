@@ -105,11 +105,6 @@ def read_eseg(dirpath, fname):
     return eseg
     
 
-def save_eseg(dirpath, fname, labels):
-    fpath = os.path.join(dirpath, fname)
-    np.savetxt(fpath, labels, fmt="%d", newline="\n")
-
-
 def read_seseg(dirpath, fname):
     fpath = os.path.join(dirpath, fname)
     seseg = np.loadtxt(fpath, dtype=np.float32)
@@ -158,7 +153,7 @@ def read_pseg_res(dir_path):
 
     Args:
         dir_path (python path): path where ground truth segmentation is saved
-        
+
     Returns:
         psegs (python list): loaded point segmentation in python list.
     """
