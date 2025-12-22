@@ -167,22 +167,6 @@ def get_edge(points, faces):
     return line_set
 
 
-#-----(not used functions below)-----
-def vis_init_patch(points, faces, labels):
-    """_summary_
-
-    Args:
-        points (ndarray): points (nump, 3)
-        labels (ndarray): initial patch labels (nump, )
-    """
-    o3d_mesh = get_mesh(points, faces)
-    colors = get_vert_color(labels)
-    o3d_mesh.vertex_colors = o3d.utility.Vector3dVector(colors)
-    o3d_line = get_edge(points, faces)
- 
-    o3d.visualization.draw_geometries([o3d_mesh, o3d_line])
-
-
 # ---------- only used in mesh_abs_visualize ----------
 def get_face_color_abs(labels, points, faces):
     """_summary_: This get labels of FACE, points, face of one cuboid
