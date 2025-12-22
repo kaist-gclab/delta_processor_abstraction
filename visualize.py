@@ -138,6 +138,15 @@ def face_colors_from_custom_labels(face_labels):
 
 
 def get_edge(points, faces):
+    """_summary_
+
+    Args:
+        points (ndarray): (nump, 3)
+        faces (ndarray): (numf, 3)
+
+    Returns:
+        line_seg (ndarray): calculated all edges segment coordinates (numf*3, 2)
+    """
     # create line_set
     line_set = o3d.geometry.LineSet()
     line_set.points = o3d.utility.Vector3dVector(points) # 이름 같지만 되긴함
@@ -192,6 +201,17 @@ def get_vert_color(labels, cmap='tab20'):
 
 # ---------- only used in mesh_abs_visualize ----------
 def get_face_color_abs(labels, points, faces):
+    """_summary_: This get labels of FACE, points, face of one cuboid
+                    and returns colored cuboid according to the label
+
+    Args:
+        labels (ndarray): labels (numf, 3)
+        points (ndarray): points (nump, 3)
+        faces (ndarray): faces (numf, 3)
+
+    Returns:
+        out_mesh: Open3d mesh that contains points, faces, 
+    """
     new_vert = points[faces].reshape(-1, 3) # (M*3, 3)
     num_faces = faces.shape[0]
     new_tri = np.arange(num_faces*3, dtype=np.int32).reshape(num_faces, 3)
@@ -208,6 +228,14 @@ def get_face_color_abs(labels, points, faces):
 
 
 def face_colors_for_abs(face_labels):
+    """_summary_
+
+    Args:
+        face_labels (python list of ndarray): (ncub, 6)
+
+    Returns:
+        colors: color for all face labels
+    """
     face_labels = np.asarray(face_labels)
     classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
     K = len(classes)
