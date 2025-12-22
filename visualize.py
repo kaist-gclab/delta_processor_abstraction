@@ -81,7 +81,7 @@ def face_colors_from_labels(face_labels, cmap_name="tab20"):
 
 def face_colors_from_custom_labels(face_labels):
     face_labels = np.asarray(face_labels)
-    classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
+    # classes, inv = np.unique(face_labels, return_inverse=True)  # stable mapping
     # K = len(classes)
     palette = np.array([
         [1,   0,   0],  # 0 -> red
