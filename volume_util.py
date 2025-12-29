@@ -187,7 +187,7 @@ def open3d_aabb_to_trimesh_box(aabb) -> trimesh.primitives.Box:
     extents = np.asarray(aabb.get_extent())   # (dx, dy, dz)
 
     # Axis-aligned → rotation = identity
-    R = np.eye(3)
+    R = np.eye(3) # 3x3 identity matrix
 
     # Build 4x4 transform
     T = np.eye(4)
