@@ -76,7 +76,7 @@ for i in tqdm(range(0,380)): # len(meshes)
         avg_abs += aioo*100 # convert to percentage
 
     if cnt % 20 == 0:
-        _class = cnt//20
+        _class = cnt//20 # divide for mesh count (hard count)
         print("Intersection over Class {}: {:.3f}%".format(_class, avg_abs/20))
         avg_abs = 0
     
