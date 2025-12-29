@@ -190,7 +190,7 @@ def open3d_aabb_to_trimesh_box(aabb) -> trimesh.primitives.Box:
     R = np.eye(3) # 3x3 identity matrix
 
     # Build 4x4 transform
-    T = np.eye(4)
+    T = np.eye(4) # 4x4 identity matrix
     T[:3, :3] = R
     T[:3, 3] = center
 
