@@ -47,8 +47,8 @@ for i in tqdm(range(0,380)): # len(meshes)
         part_faces = ut.get_face(part_mesh) # part face (num_f, 3)
         part_seg = np.zeros((part_faces.shape[0],), dtype=np.int64) # label part seg
 
-        obb_box, obb_vol = vt.obb_without_outliers(part_points, 0.03) # filter 0.03 outliers
-        aabb_box, aabb_vol = vt.aabb_without_outliers(part_points, 0.03)
+        obb_box, obb_vol = vt.obb_without_outliers(part_points, 0.03) # calc obb while filter 0.03 outliers
+        aabb_box, aabb_vol = vt.aabb_without_outliers(part_points, 0.03) # calc aabb while filter 0.03 outliers
 
         obb_mesh_box = vt.open3d_obb_to_trimesh_box(obb_box)
         aabb_mesh_box = vt.open3d_aabb_to_trimesh_box(aabb_box)
