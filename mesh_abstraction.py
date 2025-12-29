@@ -45,7 +45,7 @@ for i in tqdm(range(0,380)): # len(meshes)
 
         part_points = ut.get_vertex(part_mesh) # part point vertex
         part_faces = ut.get_face(part_mesh) # part face (num_f, 3)
-        part_seg = np.zeros((part_faces.shape[0],), dtype=np.int64)
+        part_seg = np.zeros((part_faces.shape[0],), dtype=np.int64) # label part seg
 
         obb_box, obb_vol = vt.obb_without_outliers(part_points, 0.03) # 0.03
         aabb_box, aabb_vol = vt.aabb_without_outliers(part_points, 0.03)
