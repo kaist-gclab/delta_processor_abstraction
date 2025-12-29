@@ -73,7 +73,7 @@ for i in tqdm(range(0,380)): # len(meshes)
         avg_abs += ioo*100 # convert to percentage
     else:
         # print("Intersection over Orig {}: {:.3f}".format(i+1, aioo*100))
-        avg_abs += aioo*100
+        avg_abs += aioo*100 # convert to percentage
 
     if cnt % 20 == 0:
         _class = cnt//20
