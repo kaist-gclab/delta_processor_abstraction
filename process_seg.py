@@ -30,7 +30,7 @@ point_seg, eseg_name, seseg_name = ut.read_seg_res(seg_res_path)
 
 for i in range(0, 20): # please process 20 meshes at one run
     mesh = meshes[i]
-    mesh = mesh.apply_scale(10.0)
+    mesh = mesh.apply_scale(10.0) # multiply 10 to all vertex coord
     name = names[i]
     points = ut.get_vertex(mesh)
     faces = ut.get_face(mesh)
