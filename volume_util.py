@@ -263,4 +263,4 @@ def mesh_iou_solid(orig_mesh, obb_part_list, engine="blender"):
     if v_orig <= 0: # if original volume is not positive or 0
         return 0.0
     
-    return float(v_inter/v_orig), float(v_inter/v_union)
+    return float(v_inter/v_orig), float(v_inter/v_union) # return two ratio
