@@ -70,7 +70,7 @@ for i in tqdm(range(0,380)): # len(meshes)
     aioo, aiou = vt.mesh_iou_solid(mesh, aabb_part_meshes) # compute cuboid over original mesh for aabb
     if iou > aiou: # use iou to choose one over obb and aabb
         # print("Intersection over Orig {}: {:.3f}".format(i+1, ioo*100))
-        avg_abs += ioo*100
+        avg_abs += ioo*100 # convert to percentage
     else:
         # print("Intersection over Orig {}: {:.3f}".format(i+1, aioo*100))
         avg_abs += aioo*100
