@@ -230,7 +230,7 @@ def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
     # 4) create a new Box primitive using calculated inner extents
     inner_obb = trimesh.primitives.Box(extents=inner_extents, transform=T)
 
-    inner_vol = float(np.prod(inner_extents))
+    inner_vol = float(np.prod(inner_extents)) # calculate volume
 
     return inner_obb, inner_vol
 
