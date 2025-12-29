@@ -195,7 +195,7 @@ def open3d_aabb_to_trimesh_box(aabb) -> trimesh.primitives.Box:
     T[:3, 3] = center # assign transpose
 
     # Trimesh primitive box at that pose
-    box = trimesh.primitives.Box(extents=extents, transform=T)
+    box = trimesh.primitives.Box(extents=extents, transform=T) # calculate box
     return box
 #----------convert to bounding box(trimesh)----------
 
