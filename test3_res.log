@@ -1,0 +1,46 @@
+===========================
+Start Test 3: Mesh Abstraction Area of Original Mesh Over 70%
+===========================
+Intersection over Class 1: 98.666%
+PASS: Class 1 Abstraction Area 98.666 >= 70%
+Intersection over Class 2: 86.529%
+PASS: Class 2 Abstraction Area 86.529 >= 70%
+Intersection over Class 3: 85.022%
+PASS: Class 3 Abstraction Area 85.022 >= 70%
+Intersection over Class 4: 96.889%
+PASS: Class 4 Abstraction Area 96.889 >= 70%
+Intersection over Class 5: 97.598%
+PASS: Class 5 Abstraction Area 97.598 >= 70%
+Intersection over Class 6: 94.436%
+PASS: Class 6 Abstraction Area 94.436 >= 70%
+Intersection over Class 7: 96.556%
+PASS: Class 7 Abstraction Area 96.556 >= 70%
+Intersection over Class 8: 91.107%
+PASS: Class 8 Abstraction Area 91.107 >= 70%
+Intersection over Class 9: 94.022%
+PASS: Class 9 Abstraction Area 94.022 >= 70%
+Intersection over Class 10: 97.478%
+PASS: Class 10 Abstraction Area 97.478 >= 70%
+Intersection over Class 11: 96.838%
+PASS: Class 11 Abstraction Area 96.838 >= 70%
+Intersection over Class 12: 98.501%
+PASS: Class 12 Abstraction Area 98.501 >= 70%
+Intersection over Class 13: 98.465%
+PASS: Class 13 Abstraction Area 98.465 >= 70%
+Intersection over Class 14: 98.803%
+PASS: Class 14 Abstraction Area 98.803 >= 70%
+Intersection over Class 15: 97.875%
+PASS: Class 15 Abstraction Area 97.875 >= 70%
+Intersection over Class 16: 78.918%
+PASS: Class 16 Abstraction Area 78.918 >= 70%
+Intersection over Class 17: 90.936%
+PASS: Class 17 Abstraction Area 90.936 >= 70%
+Intersection over Class 18: 96.780%
+PASS: Class 18 Abstraction Area 96.780 >= 70%
+Intersection over Class 19: 98.461%
+PASS: Class 19 Abstraction Area 98.461 >= 70%
+===========================
+Result of Abstraction Area Test
+PASS: All Class Abstraction Area >= 70%
+End of Test 3
+===========================
