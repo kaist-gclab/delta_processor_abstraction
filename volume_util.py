@@ -257,7 +257,7 @@ def mesh_iou_solid(orig_mesh, obb_part_list, engine="blender"):
         return 0.0
 
     v_orig = orig_mesh.volume # original volume
-    v_union = mesh_union.volume
+    v_union = mesh_union.volume # union volume
     v_inter = mesh_inter.volume
 
     if v_orig <= 0:
