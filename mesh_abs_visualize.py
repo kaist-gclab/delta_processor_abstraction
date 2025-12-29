@@ -27,6 +27,7 @@ f_seg = ut.read_pseg_res(seg_res_path)
 
 avg_abs = 0
 cnt = 0
+# manually picked for visualization
 visualize_idx = [3, 14, 23, 29, 53, 56, 69, 70, 88, 91, 111, 112, 122, 131, 141, 157, 171, 173,
                  183, 210, 224, 229, 240, 244, 265, 274, 281, 283, 301, 316, 320, 332, 341,
                  354, 359, 368, 379] # three vase, other classes - 2 samples
