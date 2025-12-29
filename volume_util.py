@@ -191,7 +191,7 @@ def open3d_aabb_to_trimesh_box(aabb) -> trimesh.primitives.Box:
 
     # Build 4x4 transform
     T = np.eye(4) # 4x4 identity matrix
-    T[:3, :3] = R
+    T[:3, :3] = R # set rotation
     T[:3, 3] = center
 
     # Trimesh primitive box at that pose
