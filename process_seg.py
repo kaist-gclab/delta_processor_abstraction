@@ -61,6 +61,7 @@ for i in range(0, 20): # please process 20 meshes at one run
     assert faces.shape[0] == cur_seg[elem].shape[0], "len vertices and len labels not same"
     part_meshes = vt.split_by_face_label(mesh, seg)
 
+    # calculated for visualization
     tobb_vol = 0
     tpart_vol = 0
     lst_points = []
