@@ -141,7 +141,7 @@ def aabb_without_outliers(points: np.ndarray, outlier_ratio: float = 0.05):
     # 4) build AABB from inliers
     pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(inliers))
     aabb = pcd.get_axis_aligned_bounding_box() # calc aabb
-    extents = np.asarray(aabb.get_extent())
+    extents = np.asarray(aabb.get_extent()) # length of x, y, z
     aabb_vol = float(np.prod(extents))
 
     return aabb, aabb_vol
