@@ -222,7 +222,7 @@ def inner_obb_from_obb(obb: trimesh.primitives.Box, ratioh=1.0, ratio=0.8):
     scale[2] *= ratioh
 
     # 2) shrink them
-    inner_extents = scale * ext
+    inner_extents = scale * ext # multiply scale
 
     # 3) use the same transform (same center + orientation)
     T = obb.primitive.transform
