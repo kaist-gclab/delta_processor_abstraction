@@ -52,7 +52,7 @@ for i in tqdm(range(0,380)): # len(meshes)
 
         obb_mesh_box = vt.open3d_obb_to_trimesh_box(obb_box) # convert to trimesh box
         aabb_mesh_box = vt.open3d_aabb_to_trimesh_box(aabb_box)
-        obb_mesh, obb_vol = vt.inner_obb_from_obb(obb_mesh_box, 1.0, 0.9) # 0.8
+        obb_mesh, obb_vol = vt.inner_obb_from_obb(obb_mesh_box, 1.0, 0.9) # set z length ratio to 0.9
         aabb_mesh, aabb_vol = vt.inner_obb_from_obb(aabb_mesh_box, 1.0, 0.9)
 
         obb_points = ut.get_vertex(obb_mesh).copy()
