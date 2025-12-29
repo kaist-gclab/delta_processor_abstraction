@@ -64,7 +64,7 @@ for i in tqdm(range(0,380)): # len(meshes)
         aabb_seg = np.ones((aabb_faces.shape[0],), dtype=np.int64) # label aabb seg as 1
 
         obb_part_meshes.append(obb_mesh) # append part obb to list
-        aabb_part_meshes.append(aabb_mesh)
+        aabb_part_meshes.append(aabb_mesh) # append part aabb to list
 
     ioo, iou = vt.mesh_iou_solid(mesh, obb_part_meshes)
     aioo, aiou = vt.mesh_iou_solid(mesh, aabb_part_meshes)
