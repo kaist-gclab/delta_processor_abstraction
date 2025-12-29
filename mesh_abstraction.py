@@ -66,7 +66,7 @@ for i in tqdm(range(0,380)): # len(meshes)
         obb_part_meshes.append(obb_mesh) # append part obb to list
         aabb_part_meshes.append(aabb_mesh) # append part aabb to list
 
-    ioo, iou = vt.mesh_iou_solid(mesh, obb_part_meshes)
+    ioo, iou = vt.mesh_iou_solid(mesh, obb_part_meshes) # compute cuboid over original mesh for obb
     aioo, aiou = vt.mesh_iou_solid(mesh, aabb_part_meshes)
     if iou > aiou:
         # print("Intersection over Orig {}: {:.3f}".format(i+1, ioo*100))
