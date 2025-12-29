@@ -61,7 +61,7 @@ for i in tqdm(range(0,380)): # len(meshes)
 
         aabb_points = ut.get_vertex(aabb_mesh).copy() # copy points
         aabb_faces = ut.get_face(aabb_mesh).copy() # copy faces
-        aabb_seg = np.ones((aabb_faces.shape[0],), dtype=np.int64)
+        aabb_seg = np.ones((aabb_faces.shape[0],), dtype=np.int64) # label aabb seg as 1
 
         obb_part_meshes.append(obb_mesh)
         aabb_part_meshes.append(aabb_mesh)
