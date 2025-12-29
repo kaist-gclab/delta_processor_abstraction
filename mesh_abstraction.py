@@ -56,7 +56,7 @@ for i in tqdm(range(0,380)): # len(meshes)
         aabb_mesh, aabb_vol = vt.inner_obb_from_obb(aabb_mesh_box, 1.0, 0.9)
 
         obb_points = ut.get_vertex(obb_mesh).copy() # copy points
-        obb_faces = ut.get_face(obb_mesh).copy()
+        obb_faces = ut.get_face(obb_mesh).copy() # copy faces
         obb_seg = np.ones((obb_faces.shape[0],), dtype=np.int64) # label obb seg as 1
 
         aabb_points = ut.get_vertex(aabb_mesh).copy()
